@@ -1500,6 +1500,7 @@ em { font-style: italic; font-family: var(--font-display); font-weight: 400; }
   margin: 0 auto 32px;
   filter: drop-shadow(0 0 40px rgba(232, 197, 116, 0.4));
   animation: glow 6s ease-in-out infinite alternate;
+  transition: transform 0.3s ease-out;
 }
 .cta-moon svg { width: 100%; height: 100%; }
 
@@ -3354,6 +3355,25 @@ body.modal-open { overflow: hidden; }
     updateCartBubble();
     closeCart();
     cartForm.reset();
+  });
+})();
+</script>
+
+<script>
+(function(){
+  const moon = document.querySelector('.cta-moon');
+  if (!moon) return;
+  const section = moon.closest('.order-cta');
+  section.addEventListener('mousemove', function(e) {
+    const rect = section.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    const dx = (e.clientX - centerX) / (rect.width / 2);
+    const dy = (e.clientY - centerY) / (rect.height / 2);
+    moon.style.transform = `translate(${dx * 30}px, ${dy * 20}px)`;
+  });
+  section.addEventListener('mouseleave', function() {
+    moon.style.transform = 'translate(0, 0)';
   });
 })();
 </script>
