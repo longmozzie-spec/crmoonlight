@@ -1,0 +1,4 @@
+Bỏ vào ảnh phụ cho section Câu Chuyện:
+- craftsmanship-1.jpg (nghệ nhân làm bánh)
+- craftsmanship-2.jpg (optional)
+- lantern-night.jpg (optional)
