@@ -3081,6 +3081,22 @@ body.modal-open { overflow: hidden; }
     videoFrame.addEventListener('click', toggleVideo);
     video.addEventListener('pause', () => videoFrame.classList.remove('is-playing'));
     video.addEventListener('ended', () => videoFrame.classList.remove('is-playing'));
+
+    // Auto-play when scrolled into view
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          video.muted = true;
+          video.play().then(() => {
+            videoFrame.classList.add('is-playing');
+          }).catch(() => {});
+        } else {
+          video.pause();
+          videoFrame.classList.remove('is-playing');
+        }
+      });
+    }, { threshold: 0.4 });
+    observer.observe(videoFrame);
   }
 })();
 </script>
