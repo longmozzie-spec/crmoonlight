@@ -2042,6 +2042,116 @@ body.modal-open { overflow: hidden; }
   }
 }
 
+/* Image Lightbox */
+#image-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  cursor: zoom-out;
+}
+#image-lightbox.is-open { display: flex; }
+#image-lightbox img {
+  max-width: 90vw;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+#image-lightbox .lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background: rgba(255,255,255,0.15);
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Cart Bubble */
+#cart-bubble {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--maroon-700);
+  border: 2px solid var(--gold-300);
+  color: var(--gold-100);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 999;
+  box-shadow: 0 4px 20px rgba(74,10,10,0.3);
+  transition: transform 0.2s;
+}
+#cart-bubble:hover { transform: scale(1.1); }
+#cart-bubble.visible { display: flex; }
+#cart-bubble .cart-count {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: var(--gold-400);
+  color: var(--maroon-900);
+  font-size: 11px;
+  font-weight: 700;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Cart Modal */
+#cart-modal .cart-items {
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 16px;
+}
+#cart-modal .cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--cream-300);
+  font-size: 13px;
+}
+#cart-modal .cart-item-name { font-weight: 600; color: var(--ink-700); }
+#cart-modal .cart-item-qty { color: var(--ink-500); font-size: 12px; }
+#cart-modal .cart-item-price { font-weight: 700; color: var(--maroon-700); }
+#cart-modal .cart-item-remove {
+  background: none;
+  border: none;
+  color: var(--ink-300);
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0 4px;
+}
+#cart-modal .cart-item-remove:hover { color: var(--maroon-700); }
+#cart-modal .cart-total {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  font-size: 16px;
+  font-weight: 700;
+  border-top: 2px solid var(--gold-300);
+  color: var(--maroon-700);
+}
+
 </style>
 </head>
 <body>
@@ -3048,6 +3158,186 @@ body.modal-open { overflow: hidden; }
     orderModal.classList.remove('is-open');
     document.body.classList.remove('modal-open');
     orderForm.reset();
+  });
+})();
+</script>
+
+<!-- IMAGE LIGHTBOX -->
+<div id="image-lightbox">
+  <button class="lightbox-close" aria-label="Đóng">&times;</button>
+  <img src="" alt="" />
+</div>
+
+<!-- CART BUBBLE -->
+<div id="cart-bubble" aria-label="Giỏ hàng">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+  <span class="cart-count">0</span>
+</div>
+
+<!-- CART MODAL -->
+<div class="modal-overlay" id="cart-modal" role="dialog" aria-modal="true">
+  <div class="modal-dialog" style="max-width: 500px;">
+    <button class="modal-close" id="close-cart-modal" aria-label="Đóng">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <header class="modal-header">
+      <h2 class="modal-title">Giỏ hàng của bạn</h2>
+    </header>
+    <div class="modal-body">
+      <div class="cart-items" id="cart-items-list"></div>
+      <div class="cart-total">
+        <span>Tổng cộng:</span>
+        <span id="cart-total-price">0đ</span>
+      </div>
+      <form id="cart-order-form" style="display:flex;flex-direction:column;gap:14px;margin-top:20px;">
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <label style="font-size:13px;font-weight:600;color:var(--ink-700);">Họ và tên</label>
+          <input type="text" name="fullname" required style="padding:10px 14px;border:1px solid var(--cream-300);border-radius:4px;font-size:14px;outline:none;" placeholder="Nhập họ và tên"/>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <label style="font-size:13px;font-weight:600;color:var(--ink-700);">Số điện thoại</label>
+          <input type="tel" name="phone" required style="padding:10px 14px;border:1px solid var(--cream-300);border-radius:4px;font-size:14px;outline:none;" placeholder="Nhập số điện thoại"/>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <label style="font-size:13px;font-weight:600;color:var(--ink-700);">Địa chỉ giao hàng</label>
+          <input type="text" name="address" required style="padding:10px 14px;border:1px solid var(--cream-300);border-radius:4px;font-size:14px;outline:none;" placeholder="Nhập địa chỉ"/>
+        </div>
+        <button type="submit" class="btn-gold" style="margin-top:8px;padding:12px;font-size:14px;cursor:pointer;border:none;">Xác nhận đặt hàng</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  // === CART STATE ===
+  const cart = [];
+
+  function updateCartBubble() {
+    const bubble = document.getElementById('cart-bubble');
+    const countEl = bubble.querySelector('.cart-count');
+    const total = cart.reduce((s, i) => s + i.qty, 0);
+    countEl.textContent = total;
+    bubble.classList.toggle('visible', total > 0);
+  }
+
+  function addToCart(name, priceStr) {
+    const existing = cart.find(i => i.name === name);
+    if (existing) {
+      existing.qty++;
+    } else {
+      cart.push({ name, price: priceStr, qty: 1 });
+    }
+    updateCartBubble();
+  }
+
+  function parsePrice(str) {
+    return parseInt(str.replace(/[^\d]/g, ''), 10) || 0;
+  }
+
+  function renderCartModal() {
+    const list = document.getElementById('cart-items-list');
+    const totalEl = document.getElementById('cart-total-price');
+    if (cart.length === 0) {
+      list.innerHTML = '<p style="text-align:center;color:var(--ink-300);padding:20px 0;">Giỏ hàng trống</p>';
+      totalEl.textContent = '0đ';
+      return;
+    }
+    list.innerHTML = cart.map((item, idx) => `
+      <div class="cart-item">
+        <div>
+          <span class="cart-item-name">${item.name}</span>
+          <span class="cart-item-qty"> × ${item.qty}</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="cart-item-price">${item.price}</span>
+          <button class="cart-item-remove" data-idx="${idx}">&times;</button>
+        </div>
+      </div>
+    `).join('');
+    const total = cart.reduce((s, i) => s + parsePrice(i.price) * i.qty, 0);
+    totalEl.textContent = total.toLocaleString('vi-VN') + 'đ';
+
+    list.querySelectorAll('.cart-item-remove').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const idx = parseInt(this.dataset.idx);
+        cart.splice(idx, 1);
+        updateCartBubble();
+        renderCartModal();
+      });
+    });
+  }
+
+  // === ADD TO CART HANDLERS ===
+  document.addEventListener('click', function(e) {
+    const addBtn = e.target.closest('.btn-add, .flavor-add');
+    if (!addBtn) return;
+    e.preventDefault();
+    const card = addBtn.closest('.cake-card, .flavor-card');
+    if (!card) return;
+    const name = card.querySelector('.cake-name, .flavor-name')?.textContent || '';
+    const price = card.querySelector('.cake-price, .flavor-price')?.textContent || '';
+    if (name) addToCart(name, price);
+  });
+
+  // === IMAGE LIGHTBOX ===
+  const lightbox = document.getElementById('image-lightbox');
+  const lightboxImg = lightbox.querySelector('img');
+  const lightboxClose = lightbox.querySelector('.lightbox-close');
+
+  document.addEventListener('click', function(e) {
+    const img = e.target.closest('.cake-visual img, .flavor-visual img');
+    if (!img) return;
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt;
+    lightbox.classList.add('is-open');
+    document.body.classList.add('modal-open');
+  });
+
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', function(e) {
+    if (e.target === lightbox) closeLightbox();
+  });
+  function closeLightbox() {
+    lightbox.classList.remove('is-open');
+    document.body.classList.remove('modal-open');
+  }
+
+  // === CART BUBBLE & MODAL ===
+  const cartBubble = document.getElementById('cart-bubble');
+  const cartModal = document.getElementById('cart-modal');
+  const closeCartModal = document.getElementById('close-cart-modal');
+  const cartForm = document.getElementById('cart-order-form');
+
+  cartBubble.addEventListener('click', function() {
+    renderCartModal();
+    cartModal.classList.add('is-open');
+    document.body.classList.add('modal-open');
+  });
+
+  closeCartModal.addEventListener('click', closeCart);
+  cartModal.addEventListener('click', function(e) {
+    if (e.target === cartModal) closeCart();
+  });
+  function closeCart() {
+    cartModal.classList.remove('is-open');
+    document.body.classList.remove('modal-open');
+  }
+
+  cartForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const data = new FormData(cartForm);
+    const name = data.get('fullname');
+    const phone = data.get('phone');
+    const address = data.get('address');
+    const items = cart.map(i => `${i.name} x${i.qty} (${i.price})`).join(', ');
+    const total = cart.reduce((s, i) => s + parsePrice(i.price) * i.qty, 0).toLocaleString('vi-VN') + 'đ';
+    const msg = `Đơn hàng mới:%0A- Họ tên: ${name}%0A- SĐT: ${phone}%0A- Địa chỉ: ${address}%0A- Sản phẩm: ${items}%0A- Tổng: ${total}`;
+    window.open('https://m.me/tho.duongminh.hanhtinhxanh?text=' + msg, '_blank');
+    cart.length = 0;
+    updateCartBubble();
+    closeCart();
+    cartForm.reset();
   });
 })();
 </script>
