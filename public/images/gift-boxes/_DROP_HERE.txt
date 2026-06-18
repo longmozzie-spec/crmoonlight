@@ -1,0 +1,4 @@
+Bỏ vào 3 ảnh hộp quà (PNG trong suốt):
+- box-doan-vien.png
+- box-trang-vang.png
+- box-hoang-kim.png

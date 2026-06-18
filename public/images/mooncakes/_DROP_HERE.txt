@@ -1,0 +1,63 @@
+## 24 ẢNH BÁNH TRUNG THU — TÊN FILE CHÍNH XÁC
+
+Bỏ ảnh vào folder: `images/mooncakes/`
+Format: PNG nền trong suốt, vuông 1:1 (khuyến nghị 800×800px), top-down (chụp từ trên xuống)
+
+---
+
+### 🥮 Bánh nướng cổ truyền (8 cái)
+
+| № | Tên file | Tên bánh |
+|---|---------|----------|
+| 01 | `01-bach-lien-trung-vang.png` | Bạch Liên Trứng Vàng |
+| 02 | `02-thap-cam-ga-quay.png` | Thập Cẩm Gà Quay |
+| 03 | `03-dau-xanh-trung-muoi.png` | Đậu Xanh Trứng Muối |
+| 04 | `04-hat-sen-hai-trung.png` | Hạt Sen Hai Trứng |
+| 05 | `05-khoai-mon-trung.png` | Khoai Môn Trứng |
+| 06 | `06-dau-do-hat-de.png` | Đậu Đỏ Hạt Dẻ |
+| 07 | `07-me-den-hanh-nhan.png` | Mè Đen Hạnh Nhân |
+| 08 | `08-com-dep-hat-sen.png` | Cốm Dẹp Hạt Sen |
+
+### ❄️ Bánh dẻo (6 cái)
+
+| № | Tên file | Tên bánh |
+|---|---------|----------|
+| 09 | `09-banh-deo-hat-sen.png` | Bánh Dẻo Hạt Sen |
+| 10 | `10-banh-deo-dau-xanh.png` | Bánh Dẻo Đậu Xanh |
+| 11 | `11-banh-deo-tuyet-hoa.png` | Bánh Dẻo Tuyết Hoa |
+| 12 | `12-banh-deo-sua-dua.png` | Bánh Dẻo Sữa Dừa |
+| 13 | `13-banh-deo-pandan.png` | Bánh Dẻo Pandan |
+| 14 | `14-banh-deo-tra-sen.png` | Bánh Dẻo Trà Sen |
+
+### 🍵 Hiện đại — Lava nhân chảy (6 cái)
+
+| № | Tên file | Tên bánh |
+|---|---------|----------|
+| 15 | `15-tra-xanh-matcha-lava.png` | Trà Xanh Matcha Lava |
+| 16 | `16-soco-la-den-hanh-nhan.png` | Sô-cô-la Đen Hạnh Nhân |
+| 17 | `17-tiramisu-ca-phe.png` | Tiramisu Cà Phê |
+| 18 | `18-pho-mai-viet-quat.png` | Phô Mai Việt Quất |
+| 19 | `19-caramel-muoi-bien.png` | Caramel Muối Biển |
+| 20 | `20-yuzu-mat-ong.png` | Yuzu Mật Ong |
+
+### 👑 Cao cấp — Đặc biệt (4 cái)
+
+| № | Tên file | Tên bánh |
+|---|---------|----------|
+| 21 | `21-yen-sao-vi-ca.png` | Yến Sào Vi Cá |
+| 22 | `22-vi-ca-bao-ngu.png` | Vi Cá Bào Ngư |
+| 23 | `23-khoai-mon-dau-biec.png` | Khoai Môn Hoa Đậu Biếc |
+| 24 | `24-dong-trung-ha-thao.png` | Đông Trùng Hạ Thảo |
+
+---
+
+## 📋 Quy tắc đặt tên
+
+- **Không dấu, không khoảng trắng** — dùng dấu gạch ngang `-`
+- **Số 2 chữ số đầu tiên** — `01`, `02` ... `24` (giúp sort theo thứ tự)
+- **Đuôi `.png`** (ưu tiên trong suốt) — nếu là `.jpg` thì viết đúng phần đuôi
+- **Tất cả chữ thường (lowercase)** — Windows không phân biệt nhưng web server có thể
+
+## ✅ Sau khi bỏ đủ 24 ảnh
+
+Báo tôi: *"Xong 24 ảnh"* — tôi sẽ thay 24 SVG hiện tại trong modal + 6 SVG ngoài trang chủ bằng `<img>` thật, giữ nguyên hover effect (xoay -8deg + scale 1.08).

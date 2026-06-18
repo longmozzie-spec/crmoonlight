@@ -1,0 +1,4 @@
+Bỏ vào background images:
+- red-clouds.jpg (mây đỏ - ảnh số 3)
+- paper-texture.jpg (optional)
+- gold-pattern.png (optional)

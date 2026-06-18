@@ -1,0 +1,17 @@
+## VIDEO CHO PHẦN "CÂU CHUYỆN NGUYỆT HƯƠNG"
+
+Bỏ vào folder `videos/` các file sau:
+
+### 🎬 File chính (bắt buộc)
+- `cau-chuyen.mp4` — video chính của section "Câu Chuyện"
+  - Khuyến nghị: 1080p, tỉ lệ 4:5 (vertical) hoặc 1:1 (vuông)
+  - Thời lượng: 15-60 giây (loop)
+  - Codec H.264, dung lượng < 10MB cho web
+
+### 🖼️ Ảnh poster (bắt buộc)
+- `cau-chuyen-poster.jpg` — ảnh hiển thị trước khi video play
+  - Cùng tỉ lệ với video (4:5 hoặc 1:1)
+  - Kích thước ~1200×1500px
+
+### 🎞️ Định dạng phụ (tùy chọn — cho tương thích Safari, browser cũ)
+- `cau-chuyen.webm` — phiên bản WebM nhẹ hơn

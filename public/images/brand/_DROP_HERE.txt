@@ -1,0 +1,4 @@
+Bỏ vào logo và brand assets:
+- logo.png (logo chính, PNG trong suốt)
+- logo-light.png (logo sáng cho footer)
+- favicon.ico (32x32)

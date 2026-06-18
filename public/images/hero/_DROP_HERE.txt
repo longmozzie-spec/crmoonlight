@@ -1,0 +1,1 @@
+Bỏ vào: hero-bg.jpg, mooncake-main.png, mooncake-left.png, mooncake-right.png, moon-glow.png (optional)
